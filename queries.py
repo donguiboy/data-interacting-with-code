@@ -2,8 +2,6 @@
 import sqlite3
 
 conn = sqlite3.connect('data/movies.sqlite')
-db = conn.cursor()
-rows = db.fetchall()
 
 def directors_count(db): #DONE
     query = "SELECT COUNT(id) FROM directors"
@@ -43,7 +41,7 @@ def love_movies(db):
 
 def directors_named_like_count(db, name): #DONE
     # return the number of directors which contain a given word in their name
-    query = f'SELECT COUNT(name) FROM directors WHERE Upper(name) LIKE "%{name}%"'
+    query=f'SELECT COUNT(name) FROM directors WHERE Upper(name) LIKE "%{name}%"'
     db.execute(query)
     results = db.fetchall()
     for row in results:
@@ -52,7 +50,7 @@ def directors_named_like_count(db, name): #DONE
 def movies_longer_than(db, min_length):
     # return this list of all movies which are longer than a given duration,
     # sorted in the alphabetical order
-    query = f'SELECT title, minutes FROM movies WHERE minutes >= {int(min_length)} ORDER BY title ASC'
+    query=f'SELECT title, minutes FROM movies WHERE minutes > {int(min_length)} ORDER BY title ASC'
     db.execute(query)
     results = db.fetchall()
     names = []
